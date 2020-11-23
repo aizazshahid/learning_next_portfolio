@@ -1,11 +1,29 @@
 import Link from 'next/link';
+import Head from 'next/head';
+import Router from 'next/router'
+import NProgress from 'nprogress'
+
+Router.onRouteChangeStart = url => {
+    console.log(url);
+    NProgress.start();
+}
+
+Router.onRouteChangeComplete = () => NProgress.done();
+Router.onRouteChangeError = () => NProgress.done();
 
 const Layout = ({children, title}) => (
     <div className="root">
+
+        <Head>
+            <title>Portfolio App</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" integrity="sha512-42kB9yDlYiCEfx2xVwq0q7hT4uf26FUgSIZBK8uiaEnTdShXjwr8Ip1V4xGJMg3mHkUt9nNuTDxunHF0/EgxLQ==" crossorigin="anonymous" />
+        </Head>
+
         <header>
-            <Link href="/">Home</Link> {' '}
-            <Link href="/about">About Me</Link> {' '}
-            <Link href="/hireme">Hire Me</Link> {' '}
+            <Link href="/"><a>Home</a></Link> {' '}
+            <Link href="/about"><a>About Me</a></Link> {' '}
+            <Link href="/hireme"><a>Hire Me</a></Link> {' '}
+            <Link href="/blog"><a>Blog</a></Link> {' '}
         </header>
 
         <h1>{ title }</h1>
@@ -38,6 +56,13 @@ const Layout = ({children, title}) => (
             }
             footer {
                 padding: 1em;
+            }
+        `}</style>
+        <style global jsx>{`
+            body {
+                margin: 0;
+                font-size: 110%;
+                background: #f0f0f0;
             }
         `}</style>
     </div>
